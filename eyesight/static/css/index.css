@@ -1,0 +1,71 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+footer{
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+#register_button{
+    background-color: #16b9ad;
+    color: #ffffff;
+}
+.login-popup {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+/* Masquez la forme Popup */
+.form-popup {
+    background-color: white;
+    display: none;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px grey;
+}
+#register_name{
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+input[name="register"]{
+    width: 92%;
+}
+#reg_username, #reg_password, #reg_password_confirm, input[name="register"], #reg_close{
+    margin: 10px;
+}

@@ -1,0 +1,9 @@
+html,
+
+body {
+    width: 100%;
+    background-color: #f5f5f5;
+}
+#dashboard{
+    margin-top: 20px;
+}
