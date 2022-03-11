@@ -49,7 +49,7 @@ def photo():
     print(countTimeout)
     # ----Traitement de la photo de la caméra_usb
     if len(yeux) == 2:
-        flash('Caméra usb', 'success')
+        flash('Caméra USB', 'success')
         fichier = open("data.txt", "w")
         for (x, y, h, w) in yeux:
             print('x=', x, 'y=', y, 'h=', h, 'w=', w)
@@ -67,7 +67,7 @@ def photo():
 
     # ----Traitement de la photo de la caméra_IP1
     if len(yeux_ip) == 2:
-        flash('Caméra IP', 'success')
+        flash('Caméra IP 1', 'success')
         fichier = open("data.txt", "w")
         for (x, y, h, w) in yeux_ip:
             print('x=', x, 'y=', y, 'h=', h, 'w=', w)
@@ -119,5 +119,4 @@ def photo():
     img=cv2.imread('/home/pi/Downloads/eyesight/static/bonnePhoto.png')
     res=cv2.resize(img,dsize=(384,288),interpolation=cv2.INTER_CUBIC)
     cv2.imwrite('/home/pi/Downloads/eyesight/static/bonnePhoto.png',res)
-    
     
