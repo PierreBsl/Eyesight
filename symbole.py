@@ -12,37 +12,21 @@ def symbole(delai1, delai0):
 
 
 def transmission_data(data):
+    start=time.time()
     for i in range(len(data)):
         if data[i] == '0':
-            symbole(0.0009, 0.000175)  # T1_T3
-            symbole(0.000175, 0.0009)  # T3_T1
+            symbole(0.000999, 0.000333)  # T1_T3
+            symbole(0.000333, 0.000999)  # T3_T1
 
         if data[i] == '1':
-            symbole(0.0009, 0.000175)  # T1_T3
-            symbole(0.0009, 0.000175)  # T1_T3
+            symbole(0.000999, 0.000333)  # T1_T3
+            symbole(0.000999, 0.000333)  # T1_T3
             
         if data[i] == '2':
-            symbole(0.000175, 0.0009)
-            symbole(0.000175, 0.0009)
+            symbole(0.000333, 0.000999)
+            symbole(0.000333, 0.000999)
 
         if data[i] == "S":
-            symbole(0.010656, 0.000175) #T1_T32
-            
-def trans_2(data):
-        if data == '0':
-                symbole(0.0009, 0.000175)  # T1_T3
-                symbole(0.000175, 0.0009)  # T3_T1
-                print('0')
-
-        if data == '1':
-                symbole(0.0009, 0.000175)  # T1_T3
-                symbole(0.0009, 0.000175)  # T1_T3
-                print('1')
-
-        if data == '2':
-                symbole(0.000175, 0.0009)
-                symbole(0.000175, 0.0009)
-
-        if data == "S":
-                symbole(0.010656, 0.000175)  # T1_T32
-                print('S\n')
+            symbole(0.010656, 0.000333) #T1_T32
+    end=time.time()
+    print('time transmission_data=',end-start)

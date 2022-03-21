@@ -1,9 +1,11 @@
 import symbole
+import time
 import ouverture
 
 
 def On_off():
-#---- Vérification de la detection des yeux
+    start=time.time()
+    # ---- Vérification de la detection des yeux
     autorisation=open("on_off.txt",'r')
     data=''
     autor=autorisation.read()
@@ -50,106 +52,108 @@ def On_off():
         L=list(etat)
         fichier2.close()
         count=0
-#----Envoie de la trame
+    # ---- Envoie de la trame
         if data=='A1' and L[0]=='0' :
-            while count<300:
+            while count<50:
                 symbole.transmission_data(['1','0','0','0','1','0','0','0','1','1','1','0','S']) #on
                 count+=1
         elif data=='A1' and L[0]=='1' :
-            while count<300:
+            while count<50:
                 symbole.transmission_data(['1','0','0','0','1','0','0','0','1','1','1','1','S']) #off
                 count+=1
         if data=='A2' and L[1]=='0':
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['1','0','0','0','0','1','0','0','1','1','1','0','S']) #on
                 count+=1
         elif data=='A2' and etat[1]=='1':
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['1','0','0','0','0','1','0','0','1','1','1','1','S']) #off
                 count+=1
         if data=='A3' and L[2]=='0' :
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['1','0','0','0','0','0','1','0','1','1','1','0','S']) #on
                 count+=1
         elif data=='A3' and L[2]=='1' :
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['1','0','0','0','0','0','1','0','1','1','1','1','S']) #off
                 count+=1
         if data=='B1' and L[3]=='0':
-            while count<300:
+            while count<50:
                 symbole.transmission_data(['0','1','0','0','1','0','0','0','1','1','1','0','S']) #on
                 count+=1
         elif data=='B1' and L[3]=='1' :
-            while count<300:
+            while count<50:
                 symbole.transmission_data(['0','1','0','0','1','0','0','0','1','1','1','1','S']) #off
                 count+=1
-
         if data=='B2' and L[4]=='0' :
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','1','0','0','0','1','0','0','1','1','1','0','S']) #on
                 count+=1
         elif data=='B2' and L[4]=='1':
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','1','0','0','0','1','0','0','1','1','1','1','S']) #off
                 count+=1
         if data=='B3' and L[5]=='0':
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','1','0','0','0','0','1','0','1','1','1','0','S']) #on
                 count+=1
         elif data=='B3' and L[5]=='1' :
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','1','0','0','0','0','1','0','1','1','1','1','S']) #off
                 count+=1
         if data=='C1' and L[6]=='0' :
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','0','1','0','1','0','0','0','1','1','1','0','S']) #on
                 count+=1
         elif data=='C1' and L[6]=='1' :
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','0','1','0','1','0','0','0','1','1','1','1','S']) #off
                 count+=1
         if data=='C2' and L[7]=='0' :
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','0','1','0','0','1','0','0','1','1','1','0','S']) #on
                 count+=1
         elif data=='C2' and L[7]=='1' :
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','0','1','0','0','1','0','0','1','1','1','1','S']) #off
                 count+=1
         if data=='C3' and L[8]=='0' :
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','0','1','0','0','0','1','0','1','1','1','0','S']) #on
                 count+=1
         elif data=='C3' and L[8]=='1' :
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','0','1','0','0','0','1','0','1','1','1','1','S']) #off
                 count+=1
         if data=='D1' and L[9]=='0':
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','0','0','1','1','0','0','0','1','1','1','0','S']) #on
                 count+=1
         elif data=='D1' and L[9]=='1' :
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','0','0','1','1','0','0','0','1','1','1','1','S']) #off
                 count+=1
         if data=='D2' and L[10]=='0' :
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','0','0','1','0','1','0','0','1','1','1','0','S']) #on
                 count+=1
         elif data=='D2' and L[10]=='1' :
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','0','0','1','0','1','0','0','1','1','1','1','S']) #off
                 count+=1
         if data=='D3' and L[11]=='0':
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','0','0','1','0','0','1','0','1','1','1','0','S']) #on
                 count+=1
         elif data=='D3' and L[11]=='1':
-            while count < 300:
+            while count < 50:
                 symbole.transmission_data(['0','0','0','1','0','0','1','0','1','1','1','1','S']) #off
                 count+=1
         if data=='Aucun':
             print('Aucun objet séléctionné\n')
+        # ---- Appelle de la fonction changement_etat afin de sauvegarder l'état actuelle des prises
         ouverture.changement_etat(data)
         fichier.close()
     autorisation.close()
+    end=time.time()
+    print('time On_off=',end-start)

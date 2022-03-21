@@ -17,7 +17,7 @@
 <div class="register-popup">
     <div  class="form-popup form-row" id="popupForm">
 
-        <form action="http://127.0.0.1:5000/register" method="POST" autocomplete="off">
+        <form action="{{ url_for('register')}}" method="POST" autocomplete="off">
             <h1 class="h3 mb-3 fw-normal" id="register_name">S'enregistrer</h1>
             <hr/>
             <div class="form-floating" id="reg_username">

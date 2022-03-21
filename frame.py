@@ -7,22 +7,23 @@ from matplotlib import pyplot as plt
 import numpy as np
 from flask import flash
 
+ip1 = '10.30.50.174'  # Modifier ici l'adresse ip de la camera IP
+ip2 = '10.30.50.180'  # Modifier ici l'adresse ip de la camera IP
 
-def grab_frame(text):
+def grab_frame(text): #fonction prise de photo camera IP
     cap = cv2.VideoCapture(text)
     re, frame = cap.read()
     return cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
 
-def grab_frame2():
+def grab_frame2(): #fonctio prise de photo camera_usb
     os.system('./cam.sh')
     ff = cv2.imread('/home/pi/oui.png')
     return ff
 
 
 def photo():
-    ip1 = '10.30.50.174:80'  # Modifier ici l'adresse ip de la camera IP
-    ip2 = '10.30.50.180:80'  # Modifier ici l'adresse ip de la camera IP
+    start=time.time()
     add_photo1 = 'http://' + ip1 + '/axis-cgi/jpg/image.cgi'
     add_photo2 = 'http://' + ip2 + '/axis-cgi/jpg/image.cgi'
     yeux = []
@@ -47,7 +48,7 @@ def photo():
             yeux_ip2 = FiltreY.detectMultiScale(ff_ip2, scaleFactor=1.3, minNeighbors=4, minSize=(50, 25))
             print(len(yeux_ip2))
     print(countTimeout)
-    # ----Traitement de la photo de la caméra_usb
+    # ---- Traitement de la photo de la caméra_usb
     if len(yeux) == 2:
         flash('Caméra USB', 'success')
         fichier = open("data.txt", "w")
@@ -57,15 +58,12 @@ def photo():
             message = str(x) + ' ' + str(y) + ' ' + str(h) + ' ' + str(w) + '\n'
             print(message)
             liste.append(message)
-        # list.append(str(x)+' '+str(y)+' '+str(h)+' '+str(w)+'\n')
-        # liste.append('1')
         fichier.write(liste[0])
         fichier.write(liste[1])
-        # fichier.write(liste[2])
         fichier.close()
         cv2.imwrite("bonnePhoto.png", ff)
 
-    # ----Traitement de la photo de la caméra_IP1
+    # ---- Traitement de la photo de la caméra_IP1
     if len(yeux_ip) == 2:
         flash('Caméra IP 1', 'success')
         fichier = open("data.txt", "w")
@@ -75,15 +73,12 @@ def photo():
             message = str(x) + ' ' + str(y) + ' ' + str(h) + ' ' + str(w) + '\n'
             print(message)
             liste.append(message)
-        # list.append(str(x)+' '+str(y)+' '+str(h)+' '+str(w)+'\n')
-        # liste.append('1')
         fichier.write(liste[0])
         fichier.write(liste[1])
-        # fichier.write(liste[2])
         fichier.close()
         cv2.imwrite("bonnePhoto.png", ff_ip1)
 
-    # ----Traitement de la photo de la caméra_IP1
+    # ---- Traitement de la photo de la caméra_IP2
     if len(yeux_ip2) == 2:
         flash('Caméra IP 2', 'success')
         fichier = open("data.txt", "w")
@@ -93,14 +88,12 @@ def photo():
             message = str(x) + ' ' + str(y) + ' ' + str(h) + ' ' + str(w) + '\n'
             print(message)
             liste.append(message)
-        # list.append(str(x)+' '+str(y)+' '+str(h)+' '+str(w)+'\n')
-        # liste.append('1')
         fichier.write(liste[0])
         fichier.write(liste[1])
         fichier.close()
         cv2.imwrite("bonnePhoto.png", ff_ip2)
 
-# ----Création du fichier pour autoriser la fonction On_off
+    # ---- Création du fichier pour autoriser la fonction On_off
     on = open('on_off.txt', 'w')
     if len(yeux) == 2 or len(yeux_ip) == 2 or len(yeux_ip2)==2:
         on.write('1')
@@ -115,8 +108,11 @@ def photo():
     elif len(yeux_ip2)==2:
     		cam.write('2')
     cam.close()
+    # ---- Copie et redimension de la photo pour l'affichge sur l'interface web
     os.system('cp /home/pi/Downloads/bonnePhoto.png /home/pi/Downloads/eyesight/static/bonnePhoto.png')
     img=cv2.imread('/home/pi/Downloads/eyesight/static/bonnePhoto.png')
     res=cv2.resize(img,dsize=(384,288),interpolation=cv2.INTER_CUBIC)
     cv2.imwrite('/home/pi/Downloads/eyesight/static/bonnePhoto.png',res)
+    end=time.time()
+    print('time photo =',end-start)
     
