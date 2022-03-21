@@ -39,6 +39,7 @@ Eyesight is a solution to control your connected devices by looking at IP camera
 | | |────views.py
 | |────bonnePhoto.png
 | |────cam.sh
+| |────init_db.py
 | |────choix.txt
 | |────config.txt
 | |────coordonnees_rect.py
@@ -47,6 +48,7 @@ Eyesight is a solution to control your connected devices by looking at IP camera
 | |────etat.txt
 | |────frame.py
 | |────haarcascade_eye.xml
+| |────haarcascade_frontalface_default.xml
 | |────image.py
 | |────objet_1.txt
 | |────objet_2.txt
@@ -105,6 +107,8 @@ For production environments without using flask.sh...
 ```sh
 export FLASK_APP = run.py
 export FLASK_ENV = dvp
+export DB_USERNAME = /*your db username*/
+export DB_PASSWORD = /*your db password*/
 flask run
 ```
 
