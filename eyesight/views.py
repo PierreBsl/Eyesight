@@ -44,58 +44,59 @@ def main():
                 frame.photo()
                 coordonnees_rect.coordonne()
                 On_off.On_off()
-                file = open('etat.txt', 'r')
-                char = file.read()
-                file.close()
-            
-                if char[0] == '0':
-                    session['A1'] = '<i class="bi bi-plugin"></i>'
-                else:
-                    session['A1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-                if char[1] == '0':
-                    session['A2'] = '<i class="bi bi-plugin"></i>'
-                else:
-                    session['A2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-                if char[2] == '0':
-                    session['A3'] = '<i class="bi bi-plugin"></i>'
-                else:
-                    session['A3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-                if char[3] == '0':
-                    session['B1'] = '<i class="bi bi-plugin"></i>'
-                else:
-                    session['B1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-                if char[4] == '0':
-                    session['B2'] = '<i class="bi bi-plugin"></i>'
-                else:
-                    session['B2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-                if char[5] == '0':
-                    session['B3'] = '<i class="bi bi-plugin"></i>'
-                else:
-                    session['B3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-                if char[6] == '0':
-                    session['C1'] = '<i class="bi bi-plugin"></i>'
-                else:
-                    session['C1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-                if char[7] == '0':
-                    session['C2'] = '<i class="bi bi-plugin"></i>'
-                else:
-                    session['C2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-                if char[8] == '0':
-                    session['C3'] = '<i class="bi bi-plugin"></i>'
-                else:
-                    session['C3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-                if char[9] == '0':
-                    session['D1'] = '<i class="bi bi-plugin"></i>'
-                else:
-                    session['D1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-                if char[10] == '0':
-                    session['D2'] = '<i class="bi bi-plugin"></i>'
-                else:
-                    session['D2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-                if char[11] == '0':
-                    session['D3'] = '<i class="bi bi-plugin"></i>'
-                else:
-                    session['D3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+                
+#                file = open('etat.txt', 'r')
+#                char = file.read()
+#                file.close()
+#            
+#                if char[0] == '0':
+#                    session['A1'] = '<i class="bi bi-plugin"></i>'
+#                else:
+#                    session['A1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+#                if char[1] == '0':
+#                    session['A2'] = '<i class="bi bi-plugin"></i>'
+#                else:
+#                    session['A2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+#                if char[2] == '0':
+#                    session['A3'] = '<i class="bi bi-plugin"></i>'
+#                else:
+#                    session['A3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+#                if char[3] == '0':
+#                    session['B1'] = '<i class="bi bi-plugin"></i>'
+#                else:
+#                    session['B1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+#                if char[4] == '0':
+#                    session['B2'] = '<i class="bi bi-plugin"></i>'
+#                else:
+#                    session['B2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+#                if char[5] == '0':
+#                    session['B3'] = '<i class="bi bi-plugin"></i>'
+#                else:
+#                    session['B3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+#                if char[6] == '0':
+#                    session['C1'] = '<i class="bi bi-plugin"></i>'
+#                else:
+#                    session['C1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+#                if char[7] == '0':
+#                    session['C2'] = '<i class="bi bi-plugin"></i>'
+#                else:
+#                    session['C2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+#                if char[8] == '0':
+#                    session['C3'] = '<i class="bi bi-plugin"></i>'
+#                else:
+#                    session['C3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+#                if char[9] == '0':
+#                    session['D1'] = '<i class="bi bi-plugin"></i>'
+#                else:
+#                    session['D1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+#                if char[10] == '0':
+#                    session['D2'] = '<i class="bi bi-plugin"></i>'
+#                else:
+#                    session['D2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+#                if char[11] == '0':
+#                    session['D3'] = '<i class="bi bi-plugin"></i>'
+#                else:
+#                    session['D3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
             else:
                 print('pas de visage')
         else:
@@ -107,9 +108,10 @@ def main():
             else:
                 print('pas de visage')
 
-    return render_template('dashboard.html', o1=session['objet_1'],
-                           o2=session['objet_2'], o3=session['objet_3'], o4=session['objet_4'],
-                           o5=session['objet_5'], o6=session['objet_6'])
+    return render_template('dashboard.html')
+#    return render_template('dashboard.html', o1=session['objet_1'],
+#                           o2=session['objet_2'], o3=session['objet_3'], o4=session['objet_4'],
+#                           o5=session['objet_5'], o6=session['objet_6'])
 
 
 @app.route('/profil')
