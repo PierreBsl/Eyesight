@@ -1,7 +1,7 @@
 import symbole
 import time
 import ouverture
-
+from flask import flash
 
 def On_off():
     start=time.time()
@@ -153,6 +153,7 @@ def On_off():
             print('Aucun objet séléctionné\n')
         # ---- Appelle de la fonction changement_etat afin de sauvegarder l'état actuelle des prises
         ouverture.changement_etat(data)
+        flash(data, 'success')
         fichier.close()
     autorisation.close()
     end=time.time()

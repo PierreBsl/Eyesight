@@ -99,7 +99,7 @@
 </svg>
 <main>
     <div class="d-flex flex-column flex-shrink-0 bg-light" style="width: 4.5rem;">
-        <a href="/" class="d-block p-3 link-dark text-decoration-none" title="Icon-only" data-bs-toggle="tooltip"
+        <a href="#" class="d-block p-3 link-dark text-decoration-none" title="Icon-only" data-bs-toggle="tooltip"
            data-bs-placement="right">
             <img class="mb-4" src="{{ url_for('static', filename='/img/eye-fill.svg') }}" alt="" width="40" height="40"
                  style="border-radius: 12%; ">
@@ -143,6 +143,17 @@
                     </svg>
                 </a>
             </li>
+            {% if (session['user_id'] == 18 or session['user_id']==19) %}
+                <li>
+                    <a href="{{ url_for('admin') }}" class="nav-link py-3 border-bottom" title="admin"
+                       data-bs-toggle="tooltip"
+                       data-bs-placement="right">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                          <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+                        </svg>
+                    </a>
+                </li>
+            {%endif%}
         </ul>
         <div class="dropdown border-top">
             <a href="{{ url_for('logout') }}"
@@ -157,10 +168,10 @@
         </div>
     </div>
     <div class="b-example-divider"></div>
-    <div class="container">
+    <div class="container"style="overflow:scroll;">
         <div id="dashboard">
             <header class="pb-3 mb-4 border-bottom">
-                <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
                     <span class="fs-4">Bonjour {{ session['username'] if session['username'] else 'Invité' }}, j'espère que vous allez bien.</span>
                 </a>
             </header>
@@ -168,8 +179,8 @@
             <div class="p-5 mb-4 bg-light border rounded-3">
                 <div class="container-fluid py-5"><br>
                     <h1 class="display-5 fw-bold">Contrôlez vos objets par le regard</h1>
-                    <p class="col-md-8 fs-4">En utilisant de nombreux algorithmes d'intelligence artificielle pour
-                        distinguer la position de vos yeux, ainsi qu'en envoyant des signaux par ondes radio, nous
+                    <p class="col-md-8 fs-4">En utilisant des algorithmes d'intelligence artificielle pour
+                        distinguer la position de votre visage ainsi que celle de vos yeux, nous
                         avons
                         créé cet outil
                         qui vous permettra de contrôler vos objets connectés par le regard. Après avoir selectionné
@@ -189,26 +200,27 @@
             <div class="row align-items-md-stretch">
                 <div class="col-md-6">
                     <div class="h-100 p-5 border bg-light rounded-3">
-                        <h2>Objet n°1</h2>
-                        <p>Pour contrôller votre objet n°1, il vous suffira de maintenir vos yeux vers la
-                            <strong>GAUCHE</strong>
-                            après
-                            avoir
-                            lancé la prise de photo. L'état de l'objet est enregistré et ainsi vous pourrez alterner
-                            entre
-                            On et Off automatiquement.</p>
+                        <h2>Sélectionner les prises</h2>
+                        <p>Rendez-vous sur la page de sélection des prises : &nbsp;<svg class="bi" width="24" height="24" role="img" aria-label="Products">
+                        <use xlink:href="#grid"/>
+                    </svg>
+                        <br>
+                        <br>
+                        Puis attribuez les prises aux différentes caméras à l'aide des menus déroulants.
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="h-100 p-5 bg-light border rounded-3">
-                        <h2>Objet n°2</h2>
-                        <p>Pour contrôller votre objet n°2, il vous suffira de maintenir vos yeux vers la
-                            <strong>DROITE</strong>
-                            après
-                            avoir
-                            lancé la prise de photo. L'état de l'objet est enregistré et ainsi vous pourrez alterner
-                            entre
-                            On et Off automatiquement.</p>
+                        <h2>Lancer l'application</h2>
+                        <p>Une fois les prises configurées rendez-vous sur la page dashboard : &nbsp;
+                        <svg class="bi" width="24" height="24" role="img" aria-label="Dashboard">
+                        <use xlink:href="#speedometer2"/>
+                        </svg>
+                        <br>
+                        <br>
+                        Il vous suffira ensuite de cliquer sur le bouton "Lancer l'application" 
+                    </p>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,9 @@
 <!doctype html>
+
 <html lang="fr">
 
 <head>
+    <meta http-equiv="refresh" content="3">
     <title>Dashboard</title>
     <meta charset="UTF-8"/>
     <meta http-equiv='cache-control' content='no-cache, must-revalidate'>
@@ -102,8 +104,9 @@
     </symbol>
 </svg>
 <main>
+
     <div class="d-flex flex-column flex-shrink-0 bg-light" style="width: 4.5rem;">
-        <a href="/" class="d-block p-3 link-dark text-decoration-none" title="Icon-only" data-bs-toggle="tooltip"
+        <a href="#" class="d-block p-3 link-dark text-decoration-none" title="Icon-only" data-bs-toggle="tooltip"
            data-bs-placement="right">
             <img class="mb-4" src="{{ url_for('static', filename='/img/eye-fill.svg') }}" alt="" width="40" height="40"
                  style="border-radius: 12%; ">
@@ -145,6 +148,17 @@
                     </svg>
                 </a>
             </li>
+            {% if (session['user_id'] == 18 or session['user_id']==19) %}
+                <li>
+                    <a href="{{ url_for('admin') }}" class="nav-link py-3 border-bottom" title="admin"
+                       data-bs-toggle="tooltip"
+                       data-bs-placement="right">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                          <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+                        </svg>
+                    </a>
+                </li>
+            {%endif%}
         </ul>
         <div class="dropdown border-top">
             <a href="{{ url_for('logout') }}"
@@ -159,12 +173,12 @@
         </div>
     </div>
     <div class="b-example-divider"></div>
-    <div class="container">
+    <div class="container"style="overflow:scroll;">
         <div class="row">
             <div class="col" id="dashboard">
                 <header class="pb-3 mb-4 border-bottom">
-                    <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-                        <span class="fs-4">Bonjour {{ session['username'] if session['username'] else 'Invité' }}, j'espère que vous allez bien. n° {{ session['user_id'] }}</span>
+                    <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+                        <span class="fs-4">Bonjour {{ session['username'] if session['username'] else 'Invité' }}, j'espère que vous allez bien.</span>
                     </a>
                 </header>
 
@@ -192,7 +206,8 @@
                                             height="350">
                                     </iframe>
                                     <br>
-                                    <a class="btn btn-success btn-lg btn-xl" type="button" href="{{ url_for('main') }}" style="min-width:384px;">Lancer l'application</a>
+                                    <a class="btn btn-success btn-lg btn-xl" type="button" href="{{ url_for('main') }}" style="min-width:384px;">Lancer l'application</a><br>
+                                    <a class="btn btn-danger btn-lg btn-xl" type="button" href="{{ url_for('stop') }}" style="min-width:384px;">Arrêter l'application</a>
                                     <br><br>
                                 </div>
                             </div>
@@ -210,21 +225,14 @@
                             <div class="row">
                                 <div class="col">
                                     <h2>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                             fill="currentColor" class="bi bi-plugin" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                  d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0Z"/>
-                                        </svg>                                 
+                                          
+                                        {{ session[session['objet_1']] | safe }}                             
                                         Prise {{ session['objet_1'] }}
                                     </h2>
                                 </div>
                                 <div class="col">
                                     <h2>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                             fill="currentColor" class="bi bi-plugin" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                  d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0Z"/>
-                                        </svg>
+                                        {{ session[session['objet_2']] | safe }}
                                         Prise {{ session['objet_2'] }}
                                     </h2>
                                 </div>
@@ -238,21 +246,13 @@
                             <div class="row">
                                 <div class="col">
                                     <h2>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                             fill="currentColor" class="bi bi-plugin" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                  d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0Z"/>
-                                        </svg>
+                                        {{ session[session['objet_3']] | safe }}
                                         Prise {{ session['objet_3'] }}
                                     </h2>
                                 </div>
                                 <div class="col">
                                     <h2>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                             fill="currentColor" class="bi bi-plugin" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                  d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0Z"/>
-                                        </svg>
+                                        {{ session[session['objet_4']] | safe }}
                                         Prise {{ session['objet_4'] }}
                                     </h2>
                                 </div>
@@ -266,21 +266,13 @@
                             <div class="row">
                                 <div class="col">
                                     <h2>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                             fill="currentColor" class="bi bi-plugin" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                  d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0Z"/>
-                                        </svg>
+                                        {{ session[session['objet_5']] | safe}}
                                         Prise {{ session['objet_5'] }}
                                     </h2>
                                 </div>
                                 <div class="col">
                                     <h2>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                             fill="currentColor" class="bi bi-plugin" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                  d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0Z"/>
-                                        </svg>
+                                        {{ session[session['objet_6']] | safe }}
                                         Prise {{ session['objet_6'] }}
                                     </h2>
                                 </div>
@@ -295,7 +287,9 @@
 
 </main>
 </body>
+{{ url_for('main') }}
 <!-- JavaScript Bundle with Popper -->
+
 <script>
     /* global bootstrap: false */
     (function () {

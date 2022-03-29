@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, redirect, request, flash, ses
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import psycopg2
+import time
 
 import frame
 import coordonnees_rect
@@ -11,7 +12,7 @@ import visage
 ip1 = '10.30.50.174'  # Modifier ici l'adresse ip de la camera IP
 ip2 = '10.30.50.180'  # Modifier ici l'adresse ip de la camera IP
 app = Flask(__name__)
-
+run=True
 # Config options - Make sure you created a 'config.py' file.
 app.config.from_object('config')
 
@@ -26,6 +27,83 @@ def get_db_connection():
     return conn
 
 
+def application():
+    if ip1 != '' and ip2 != '':
+        if visage.detection(frame.grab_frame2()) or visage.detection(
+                frame.grab_frame('http://' + ip1 + '/axis-cgi/jpg/image.cgi')) or visage.detection(
+            frame.grab_frame('http://' + ip2 + '/axis-cgi/jpg/image.cgi')):
+            print('visage:ok')
+            frame.photo()
+            coordonnees_rect.coordonne()
+            On_off.On_off()
+            print('ok trame')
+            return render_template('dashboard.html')
+        else:
+            print('pas de visage')
+    else:
+        if visage.detection(frame.grab_frame2()):
+            print('visage: ok')
+            frame.photo()
+            coordonnees_rect.coordonne()
+            On_off.On_off()
+            return render_template('dashboard.html')
+        else:
+            print('pas de visage')
+    return render_template('dashboard.html')
+
+def chg_prise():
+    file = open('etat.txt', 'r')
+    char = file.read()
+    if char[0] == '0':
+        session['A1'] = '<i class="bi bi-plugin"></i>'
+    else:
+        session['A1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+    if char[1] == '0':
+        session['A2'] = '<i class="bi bi-plugin"></i>'
+    else:
+        session['A2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+    if char[2] == '0':
+        session['A3'] = '<i class="bi bi-plugin"></i>'
+    else:
+        session['A3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+    if char[3] == '0':
+        session['B1'] = '<i class="bi bi-plugin"></i>'
+    else:
+        session['B1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+    if char[4] == '0':
+        session['B2'] = '<i class="bi bi-plugin"></i>'
+    else:
+        session['B2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+    if char[5] == '0':
+        session['B3'] = '<i class="bi bi-plugin"></i>'
+    else:
+        session['B3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+    if char[6] == '0':
+        session['C1'] = '<i class="bi bi-plugin"></i>'
+    else:
+        session['C1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+    if char[7] == '0':
+        session['C2'] = '<i class="bi bi-plugin"></i>'
+    else:
+        session['C2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+    if char[8] == '0':
+        session['C3'] = '<i class="bi bi-plugin"></i>'
+    else:
+        session['C3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+    if char[9] == '0':
+        session['D1'] = '<i class="bi bi-plugin"></i>'
+    else:
+        session['D1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+    if char[10] == '0':
+        session['D2'] = '<i class="bi bi-plugin"></i>'
+    else:
+        session['D2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+    if char[11] == '0':
+        session['D3'] = '<i class="bi bi-plugin"></i>'
+    else:
+        session['D3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
+    
+    file.close()
 # To get one variable, tape app.config['MY_VARIABLE']
 
 @app.route('/')
@@ -35,88 +113,23 @@ def index():
 
 @app.route('/main')
 def main():
-    while True:
-        if ip1 != '' and ip2 != '':
-            if visage.detection(frame.grab_frame2()) or visage.detection(
-                    frame.grab_frame('http://' + ip1 + '/axis-cgi/jpg/image.cgi')) or visage.detection(
-                frame.grab_frame('http://' + ip2 + '/axis-cgi/jpg/image.cgi')):
-                print('visage:ok')
-                frame.photo()
-                coordonnees_rect.coordonne()
-                On_off.On_off()
-                
-#                file = open('etat.txt', 'r')
-#                char = file.read()
-#                file.close()
-#            
-#                if char[0] == '0':
-#                    session['A1'] = '<i class="bi bi-plugin"></i>'
-#                else:
-#                    session['A1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-#                if char[1] == '0':
-#                    session['A2'] = '<i class="bi bi-plugin"></i>'
-#                else:
-#                    session['A2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-#                if char[2] == '0':
-#                    session['A3'] = '<i class="bi bi-plugin"></i>'
-#                else:
-#                    session['A3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-#                if char[3] == '0':
-#                    session['B1'] = '<i class="bi bi-plugin"></i>'
-#                else:
-#                    session['B1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-#                if char[4] == '0':
-#                    session['B2'] = '<i class="bi bi-plugin"></i>'
-#                else:
-#                    session['B2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-#                if char[5] == '0':
-#                    session['B3'] = '<i class="bi bi-plugin"></i>'
-#                else:
-#                    session['B3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-#                if char[6] == '0':
-#                    session['C1'] = '<i class="bi bi-plugin"></i>'
-#                else:
-#                    session['C1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-#                if char[7] == '0':
-#                    session['C2'] = '<i class="bi bi-plugin"></i>'
-#                else:
-#                    session['C2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-#                if char[8] == '0':
-#                    session['C3'] = '<i class="bi bi-plugin"></i>'
-#                else:
-#                    session['C3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-#                if char[9] == '0':
-#                    session['D1'] = '<i class="bi bi-plugin"></i>'
-#                else:
-#                    session['D1'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-#                if char[10] == '0':
-#                    session['D2'] = '<i class="bi bi-plugin"></i>'
-#                else:
-#                    session['D2'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-#                if char[11] == '0':
-#                    session['D3'] = '<i class="bi bi-plugin"></i>'
-#                else:
-#                    session['D3'] = '<i class="bi bi-plugin" style="color: green;"></i>'
-            else:
-                print('pas de visage')
-        else:
-            if visage.detection(frame.grab_frame2()):
-                print('visage: ok')
-                frame.photo()
-                coordonnees_rect.coordonne()
-                On_off.On_off()
-            else:
-                print('pas de visage')
-
+    chg_prise()
+    application()
     return render_template('dashboard.html')
-#    return render_template('dashboard.html', o1=session['objet_1'],
-#                           o2=session['objet_2'], o3=session['objet_3'], o4=session['objet_4'],
-#                           o5=session['objet_5'], o6=session['objet_6'])
-
+        
+    
+        
 
 @app.route('/profil')
 def profil():
     return render_template('profil.html')
+
+@app.route('/stop')
+def stop():
+    global run
+    run=False
+    flash('Application Stopped', 'success')
+    return render_template('dashboard.html')
 
 
 @app.route('/select_objet', methods=['GET', 'POST'])
@@ -183,8 +196,56 @@ def select_objet():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html', )
+    chg_prise()
+    return render_template('dashboard.html')
+    
+    
+@app.route('/admin')
+def admin():
+    global run
+    run=False
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM users ;")
+    res = cur.fetchall()
 
+    fichier = open("table.txt", "w")
+    fichier.write('<table class="table"><thead><tr><th scope="col">#</th><th scope="col">Username</th></tr></thead><tbody>')
+
+    for raw in res:
+        fichier.write('<tr>')
+        fichier.write('<th id="admin" scope="row">'+str(raw[0])+'</th>')
+        fichier.write('<td>'+ raw[1]+'</td>')
+        fichier.write('<td><form method="POST" action="/deleteUser"><button style="float: right" name="Delete" value="'+str(raw[0])+'" type="submit" class="btn btn-danger">Delete</button></form></td>')
+        fichier.write('</tr>')
+
+    fichier.write('</tbody>')
+    fichier.write('</table>')
+    fichier.close()
+
+    file = open("table.txt", "r")
+    table = file.read()
+    print (table)
+    return render_template('admin.html', table=table)
+
+@app.route('/deleteUser', methods=['GET','POST'])
+def deleteUser():
+    if request.method == 'POST':
+        value = request.form.get("Delete")
+        
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("DELETE FROM objects WHERE user_id = '"+str(value)+"';")
+        cur.execute("DELETE FROM users WHERE userid = '"+str(value)+"';")
+        conn.commit()
+        cur.close()
+        conn.close()
+        
+        return redirect(url_for('admin'))
+    else:
+        return render_template('admin.html')
+        
+        
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -202,8 +263,26 @@ def login():
         if check_password_hash(val, paword):
             cur.execute("SELECT userid FROM users WHERE username = '" + usname + "';")
             usid = cur.fetchone()[0]
+            cur.execute("SELECT objet_1 FROM objects WHERE user_id = '" + str(usid) + "';")
+            o1 = cur.fetchone()[0]
+            cur.execute("SELECT objet_2 FROM objects WHERE user_id = '" + str(usid) + "';")
+            o2 = cur.fetchone()[0]
+            cur.execute("SELECT objet_3 FROM objects WHERE user_id = '" + str(usid) + "';")
+            o3 = cur.fetchone()[0]
+            cur.execute("SELECT objet_4 FROM objects WHERE user_id = '" + str(usid) + "';")
+            o4 = cur.fetchone()[0]
+            cur.execute("SELECT objet_5 FROM objects WHERE user_id = '" + str(usid) + "';")
+            o5 = cur.fetchone()[0]
+            cur.execute("SELECT objet_6 FROM objects WHERE user_id = '" + str(usid) + "';")
+            o6 = cur.fetchone()[0]
             session['user_id'] = usid
             session['username'] = usname
+            session['objet_1'] = o1
+            session['objet_2'] = o2
+            session['objet_3'] = o3
+            session['objet_4'] = o4
+            session['objet_5'] = o5
+            session['objet_6'] = o6
             return render_template('profil.html')
 
         else:
@@ -276,16 +355,22 @@ def register():
 
 @app.route('/contact')
 def contact():
+    global run
+    run=False
     return render_template('contact.html')
 
 
 @app.route('/calendar')
 def calendar():
+    global run
+    run=False
     return render_template('calendar.html')
 
 
 @app.route('/logout')
 def logout():
+    global run
+    run=False
     session.clear()
     flash('Vous avez été correctement déconnecté', 'success')
     return redirect(url_for('index'))

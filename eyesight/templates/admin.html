@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <head>
-    <title>Contact</title>
+    <title>Profil</title>
     <meta charset="UTF-8"/>
 
     <!-- CSS only -->
@@ -107,7 +107,8 @@
         </a>
         <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
             <li class="nav-item">
-                <a href="{{ url_for('profil') }}" class="nav-link py-3 border-bottom" aria-current="page" title="Home"
+                <a href="{{ url_for('profil') }}" class="nav-link py-3 border-bottom" aria-current="page"
+                   title="Home"
                    data-bs-toggle="tooltip" data-bs-placement="right">
                     <svg class="bi" width="24" height="24" role="img" aria-label="Home">
                         <use xlink:href="#home"/>
@@ -124,32 +125,33 @@
                 </a>
             </li>
             <li>
-                <a href="{{ url_for('calendar') }}" class="nav-link py-3 border-bottom" title="Orders" data-bs-toggle="tooltip"
+                <a href="{{ url_for('calendar') }}" class="nav-link py-3 border-bottom" title="Orders"
+                   data-bs-toggle="tooltip"
                    data-bs-placement="right">
-                    <svg class="bi" width="24" height="24" role="img" aria-label="Orders">
+                    <svg class="bi" width="24" height="24" role="img" aria-label="Products">
                         <use xlink:href="#grid"/>
                     </svg>
+
                 </a>
             </li>
             <li>
-                <a href="{{ url_for('contact') }}" class="nav-link active py-3 border-bottom" title="Customers" data-bs-toggle="tooltip"
+                <a href="{{ url_for('contact') }}" class="nav-link py-3 border-bottom" title="Customers"
+                   data-bs-toggle="tooltip"
                    data-bs-placement="right">
                     <svg class="bi" width="24" height="24" role="img" aria-label="Customers">
                         <use xlink:href="#people-circle"/>
                     </svg>
                 </a>
             </li>
-            {% if (session['user_id'] == 18 or session['user_id']==19) %}
-                <li>
-                    <a href="{{ url_for('admin') }}" class="nav-link py-3 border-bottom" title="admin"
-                       data-bs-toggle="tooltip"
-                       data-bs-placement="right">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-                          <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
-                        </svg>
-                    </a>
-                </li>
-            {%endif%}
+            <li>
+                <a href="{{ url_for('admin') }}" class="nav-link active py-3 border-bottom" title="admin"
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="right">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                      <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+                    </svg>
+                </a>
+            </li>
         </ul>
         <div class="dropdown border-top">
             <a href="{{ url_for('logout') }}"
@@ -164,48 +166,21 @@
         </div>
     </div>
     <div class="b-example-divider"></div>
+
     <div class="container" style="overflow:scroll;">
-        <div id="dashboard">
-            <header class="pb-3 mb-4 border-bottom">
+        <div id="dashboard">  
+        <header class="pb-3 mb-4 border-bottom">
                 <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
                     <span class="fs-4">Bonjour {{ session['username'] if session['username'] else 'Invité' }}, j'espère que vous allez bien.</span>
                 </a>
             </header>
-
-            <div class="p-5 mb-4 bg-light border rounded-3">
-                    <div class="container-fluid py-5">
-                        <h1 class="display-5 fw-bold">L'équipe</h1>
-                    <br><br><br>
-                    <div class="row">
-                        <div class="col-lg-4" style="text-align: center;">
-                            <img class="bd-placeholder-img rounded-circle" src="{{ url_for('static', filename='/img/pilliet.jpg') }}" width="140" height="140"/>
-                            <br>
-                            <br>
-                            <h2 style="text-align: center;">Quentin Pilliet</h2>
-                            <br>
-                            <p style="text-align: center;">Étudiant à l'ISEN Nantes.<br>Domaine professionnel: IoT. <br> <a href="mailto::quentin.pilliet@isen-ouest.yncrea.fr">quentin.pilliet@isen-ouest.yncrea.fr</a></p>
-                        </div><!-- /.col-lg-4 -->
-                        <div class="col-lg-4" style="text-align: center;">
-                            <img class="bd-placeholder-img rounded-circle" src="{{ url_for('static', filename='/img/boisleve.jpg') }}" width="140" height="140"/>
-                            <br>
-                            <br>
-                            <h2 style="text-align: center;">Pierre Boislève</h2>
-                            <br>
-                            <p style="text-align: center;">Étudiant à l'ISEN Nantes.<br>Domaine professionnel: IoT. <br> <a href="mailro::pierre.boisleve@isen-ouest.yncrea.fr">pierre.boisleve@isen-ouest.yncrea.fr</a></p>
-                        </div><!-- /.col-lg-4 -->
-                        <div class="col-lg-4" style="text-align: center;">
-                            <img class="bd-placeholder-img rounded-circle" src="{{ url_for('static', filename='/img/jridi.jpg') }}" width="140" height="140"/>
-                            <br>
-                            <br>
-                            <h2 style="text-align: center;">Maher Jridi</h2>
-                            <br>
-                            <p style="text-align: center;">Professeur encadrant du projet.<br> <a href="mailro::maher.jridi@isen-ouest.yncrea.fr">maher.jridi@isen-ouest.yncrea.fr</a></p>
-                        </div><!-- /.col-lg-4 -->
-                    </div><!-- /.row -->
+                  <div class="p-5 mb-4 bg-light border rounded-3">
+                      <div class="container-fluid py-5">
+                      <h2>Base de donnée des utilisateurs</h2><br>
+                      {{ table|safe}}
+                      </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 
