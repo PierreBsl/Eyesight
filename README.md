@@ -98,7 +98,6 @@ But also different packages such as
 Install the dependencies and devDependencies and start the server.
 
 ```sh
-cd Downloads
 ./flask.sh
 ```
 
